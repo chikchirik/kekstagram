@@ -11,9 +11,15 @@ var hideOverlayHandler = function () {
   hideOverlayElement();
 };
 
+function setDefaultFilter() {
+  scaleImage(100);
+  imagePreview.classList.remove(currentFilter);
+}
+
 function showOverlayElement() {
   selectImageForm.classList.add('invisible');
   uploadOverlay.classList.remove('invisible');
+  setDefaultFilter();
 }
 
 function hideOverlayElement() {
