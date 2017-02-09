@@ -29,6 +29,7 @@ function hideOverlayElement() {
 
 /* Image filter */
 var imagePreview = uploadOverlay.querySelector('.filter-image-preview');
+var filterControls = document.querySelector('.upload-filter-controls');
 var currentFilter = null;
 var ENTER_KEY_CODE = 13;
 
@@ -44,12 +45,13 @@ function changeFilter(filterName) {
 
 function changeFilterValue(event) {
   if (event.keyCode === ENTER_KEY_CODE) {
-    var filterId = event.target.getAttribute('for');
-    changeFilter(document.getElementById(filterId).value);
+    var filterId = document.getElementById(event.target.getAttribute('for'));
+    filterId.checked = 'true';
+    changeFilter(filterId.value);
   }
 }
 
-function selectFilterKeydownHandler(event){
+function selectFilterKeydownHandler(event) {
   changeFilterValue(event);
   toggleButton(event.target);
 }
@@ -91,8 +93,8 @@ function zoomIn() {
 selectImageForm.querySelector('#upload-file').addEventListener('change', showOverlayHandler);
 document.forms['upload-filter'].querySelector('.upload-form-cancel').addEventListener('click', hideOverlayHandler);
 
-document.forms['upload-filter'].addEventListener('change', selectFilterHandler);
-document.forms['upload-filter'].querySelector('.upload-filter-controls').addEventListener('keydown', selectFilterKeydownHandler);
+filterControls.addEventListener('change', selectFilterHandler);
+filterControls.addEventListener('keydown', selectFilterKeydownHandler);
 
 uploadOverlay.querySelector('.upload-resize-controls-button-inc').addEventListener('click', zoomIn);
 uploadOverlay.querySelector('.upload-resize-controls-button-dec').addEventListener('click', zoomOut);
